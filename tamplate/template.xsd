@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="http://www.xmljs.org/schema"
+           elementFormDefault="qualified"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="template" type="nam:bodyType" xmlns:nam="http://www.xmljs.org/schema"/>
+
+    <xs:complexType name="bodyType">
+        <xs:sequence>
+            <xs:element name="function" type="nam:functionType" xmlns:nam="http://www.xmljs.org/schema"/>
+            <xs:any minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="functionType">
+        <xs:sequence>
+            <xs:element name="params" type="nam:paramsType" xmlns:nam="http://www.xmljs.org/schema"/>
+            <xs:element name="body" type="nam:bodyType" xmlns:nam="http://www.xmljs.org/schema"/>
+        </xs:sequence>
+        <xs:attribute name="name" type="nam:functionDataType" use="required" xmlns:nam="http://www.xmljs.org/schema"/>
+    </xs:complexType>
+
+
+    <xs:complexType name="paramsType">
+        <xs:sequence>
+            <xs:element name="param" minOccurs="1" maxOccurs="unbounded" type="nam:paramType" xmlns:nam="http://www.xmljs.org/schema"/>
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <xs:complexType name="paramType">
+        <xs:all>
+            <xs:element name="name"/>
+            <xs:element name="value">
+                <xs:complexType mixed="true">
+                    <xs:sequence>
+                        <xs:any minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:all>
+        <xs:attribute name="name" type="xs:string" use="optional"/>
+        <xs:attribute name="value" type="xs:string" use="optional"/>
+    </xs:complexType>
+
+    <xs:simpleType name="functionDataType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="for"/>
+            <xs:enumeration value="elements"/>
+            <xs:enumeration value="if"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+    <xs:element name="attribute" type="nam:paramType" xmlns:nam="http://www.xmljs.org/schema"/>
+
+</xs:schema>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!DOCTYPE template [
+        <!ENTITY name "Название">
+        <!ENTITY role "Роли">
+        <!ENTITY date "Дата">
+        ]>
+
+<xmljs:template xmlns:xmljs="http://www.xmljs.org/schema"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="http://www.xmljs.org/schema template.xsd">
+
+    <xmljs:data>
+        <person>Person 1</person>
+        <person>Person 2</person>
+        <users>
+            <user>
+                <name>Kuzmin Oleg</name>
+                <role>Admin</role>
+                <date>30.11.1990</date>
+            </user>
+            <user>
+                <name>Ivanov Ivan</name>
+                <role>Modeartor</role>
+                <date>30.11.1990</date>
+            </user>
+            <user>
+                <name>Svetlacova Ira</name>
+                <role>User</role>
+                <date>30.11.1990</date>
+            </user>
+        </users>
+    </xmljs:data>
+
+    <xmljs:body>
+
+        <table style="x-style">
+
+            <tr>
+                <th>&name;</th>
+                <th>&role;</th>
+                <th>&date;</th>
+            </tr>
+
+            <xmljs:for iteration="5">
+                <xmljs:body>
+
+                    <tr>
+                        <td><xmljs:paste xpath="users/user[${iteration}]/name"/></td>
+                        <td><xmljs:paste xpath="users/user[${iteration}]/role"/></td>
+                        <td><xmljs:paste xpath="users/user[${iteration}]/date"/></td>
+                    </tr>
+
+                </xmljs:body>
+            </xmljs:for>
+
+        </table>
+
+    </xmljs:body>
+
+
+</xmljs:template>
